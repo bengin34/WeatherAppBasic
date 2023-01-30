@@ -2,5 +2,5 @@
 Another basic weather app
  https://bengin34.github.io/WeatherAppBasic/
 
-https://user-images.githubusercontent.com/118957608/215512793-4c5cf383-abe8-4802-939c-398fe9817fb3.mp4
 
+![video](https://user-images.githubusercontent.com/118957608/215514463-aa4a219c-12f9-4448-ad10-bbf5b903bd86.gif)
