@@ -19,7 +19,7 @@ document.addEventListener("submit", (e) => {
 const getDatas = async () => {
   let cityInput = city.value;
   const apiKey = "43f3d3471358a0770f15f24ec227b978";
-  const url = ` http://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=metric `;
+  const url = ` https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=metric `;
 
   try {
     const responsive = await fetch(url);
