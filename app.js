@@ -19,26 +19,40 @@ document.addEventListener("submit", (e) => {
 const getDatas = async () => {
   let cityInput = city.value;
   const apiKey = "43f3d3471358a0770f15f24ec227b978";
-  const url = ` https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=metric `;
+  const url = ` http://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=metric`;
 
-  try {
-    const responsive = await fetch(url);
-    if (!responsive.ok) {
-      throw new Error("There is an error here!!!");
-    }
-    const data = await responsive.json();
-    console.log(data);
-    getValues(data);
-  } catch (error) {
-    if (city.value === "") {
-      message.innerText = `Please enter a city name`;
-      // message.classList.toggle("message")
+  if( !cityInput == "" && isNaN(cityInput)){
+    try {
+      const responsive = await fetch(url);
+      if(responsive.status == 404 ){
+        return ( message.innerText = "Enter a valid city name",
+        setTimeout(() => {
+          message.innerText = "";
+        }, 2000));
+      }
+      else if (!responsive.ok) {
+        throw new Error("There is an error here!!!");
+      }else{
+
+        const data = await responsive.json();
+      
+        getValues(data);
+
+      }
+    } catch (error) {
+      if (city.value === "") {
+        message.innerText = `Please enter a city name`;
+        // message.classList.toggle("message")
+        setTimeout(() => {
+          message.innerText = "";
+        }, 2000);
+      }
+    } 
+  }else {
+    message.innerText = "Please enter a city name"
       setTimeout(() => {
-        message.innerText = "";
-      }, 2000);
-    } else {
-      console.log(error);
-    }
+          message.innerText ="";
+      },2000)
   }
 
   //todo fetch
@@ -63,7 +77,7 @@ const getValues = (value) => {
     // cityArr.push(cityId)  or
 
     cityArr = [cityId, ...cityArr];
-
+    
     cities.innerHTML += `
     <li class="card col-lg-6 col-md-4 g-6" style="width: 18rem;">
     <img src="./icons/${Image}.png" class="card-img-top" alt="...">
@@ -76,6 +90,7 @@ const getValues = (value) => {
   </li>
   
   `;
-    message.innerText = "";
+  
   }
 };
+
